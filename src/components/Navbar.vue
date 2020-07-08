@@ -1,19 +1,28 @@
 <template>
-  <nav id="navbar" class="navbar d-flex align-items-center flex-row">
-    <!-- <div class="nav-brand">
-      <router-link to="/">
-        <img src="/img/logo.png" class="logo" alt="corvus logo" />
-      </router-link>
-    </div> -->
-    <div class="navbar-collapse h-100 d-flex align-items-center flex-row justify-space-between">
-      <ul class="navbar-nav d-flex align-items-center flex-row h-100">
-        <li class="nav-item h-100" v-for="(item, index) in navLinks" :key="index">
-          <router-link :to="item.to" class="nav-link h-100 d-flex align-items-center" >{{item.text}}</router-link>
-        </li>
-      </ul>
-      <button class="button-sign-out">Sign out</button>
-    </div>
-  </nav>
+  <b-navbar toggleable="lg" >
+    <b-container>
+      <b-navbar-brand to="/">
+      <img src="../assets/img/corvus_logo.png" alt="fluid" class="img-fluid">
+    </b-navbar-brand>
+
+    <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
+    <b-collapse id="nav-collapse" is-nav>
+      <b-navbar-nav>
+        <b-nav-item v-for="(link, index) in navLinks" :key="index" :to="link.to">{{ link.name }}</b-nav-item>
+      </b-navbar-nav>
+
+      <!-- Right aligned nav items -->
+      <b-navbar-nav class="ml-auto">
+        <!-- <b-nav-form>
+          <b-form-input size="sm" class="mr-sm-2" placeholder="Search"></b-form-input>
+        </b-nav-form> -->
+        <b-button size="sm" variant="primary" class="my-2 my-sm-0 bg-transparent">Sign out</b-button>
+
+      </b-navbar-nav>
+    </b-collapse>
+    </b-container>
+  </b-navbar>
 </template>
 
 <script>
@@ -23,10 +32,10 @@ export default {
   data() {
     return {
       navLinks: [
-        { to: "/", text: "Warehouse" },
-        { to: "/Discrepancy", text: "Discrepancy ananlysis" },
-        { to: "/Reports", text: "Reports" },
-        { to: "/Flight", text: "Flight data" },
+        { to: "/", name: "Warehouse" },
+        { to: "/Discrepancy", name: "Discrepancy analysis" },
+        { to: "/Reports", name: "Reports" },
+        { to: "/Flight", name: "Flight data" },
       ]
     };
   },
@@ -35,26 +44,20 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
   .navbar {
     background-color: #fff;
     box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
-    padding: 0 60px;
-    height: 75px;
+    height: 48px;
+    .nav-link {
+      padding: 0 15px;
+      font-size: 18px;
+      // color: $text-light;
+      font-weight: 500;
+      position: relative;
+    }
   }
-  .navbar-nav {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  .nav-link {
-    padding: 0 15px;
-    font-size: 18px;
-    color: #000;
-    font-weight: 500;
-    position: relative;
-  }
-  .nav-link::after {
+  /* .nav-link::after {
     content: '';
     position: absolute;
     transition: 0.3s ease;
@@ -65,20 +68,8 @@ export default {
     background-color: #0000ff63;
     opacity: 0;
   }
-  .navbar-collapse {
-    flex: 1;
-  }
   .nav-link.router-link-exact-active::after {
     opacity: 1;
     width: 100%;
-  }
-  .button-sign-out {
-    border: 3px solid #0000ff63;
-    background-color: transparent;
-    height: 50px;
-    width: 150px;
-    border-radius: 5px;
-    font-size: 18px;
-    font-weight: 500;
-  }
+  } */
 </style>

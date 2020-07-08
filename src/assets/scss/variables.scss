@@ -1,0 +1,9 @@
+$primary: #1A6FB1;
+$text-light: #B7B7B7;
+$text-dark: #2F2F2F;
+$black: #000000;
+
+// Bootstrap and its default variables
+@import '/node_modules/bootstrap/scss/bootstrap';
+// BootstrapVue and its default variables
+@import '/node_modules/bootstrap-vue/src/index.scss';

@@ -15,7 +15,8 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+// @import './assets/scss/variables.scss';
 body,
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -23,33 +24,5 @@ body,
   -moz-osx-font-smoothing: grayscale;
   margin: 0;
   padding: 0;
-}
-
-a {
-  text-decoration: none;
-}
-
-.h-100 {
-  height: 100%;
-}
-
-.d-flex {
-  display: flex;
-}
-
-.flex-row {
-  flex-direction: row;
-}
-
-.align-items-center {
-  align-items: center;
-}
-
-.justify-content-center {
-  justify-content: center;
-}
-
-.justify-space-between {
-  justify-content: space-between;
 }
 </style>
