@@ -1,7 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,100&display=swap');
+
+$font-primary: 'IBM Plex Sans';
 $primary: #1A6FB1;
 $text-light: #B7B7B7;
 $text-dark: #2F2F2F;
+$paragraph-color: #7A7A7A;
 $black: #000000;
+$body-background: #E5E5E5;
 
 // Bootstrap and its default variables
 @import '/node_modules/bootstrap/scss/bootstrap';
