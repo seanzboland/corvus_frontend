@@ -41,26 +41,38 @@
       <p :class="`m-0 ${showDetails ? 'mt-3' : ''}`">Data valid between Jun 18 and Jun 30, 2019</p>
     </div>
     <ProductResults :exception="78" :unscanned="2" :occupied="89" :unoccupied="10" />
+    <Filters :filters="filters" />
+    <b-row class="product-slots">
+      <b-col cols="12" sm="6" md="4" lg="3" v-for="i in 12" :key="i">
+        <SlotItem :slotType="j" v-for="j in slotTypes" :key="j+1" />
+      </b-col>
+    </b-row>
   </b-container>
 </template>
 
 <script>
 import ProductResults from "@/components/ProductResults";
+import Filters from "@/components/Filters";
+import SlotItem from "@/components/SlotItem";
 
 export default {
   name: "productDetails",
   data() {
     return {
-      showDetails: false
+      showDetails: false,
+      slotTypes: ["exception", "occupied", "unscanned", "unoccupied"],
+      filters: ["Extra", "Mismatched", "Missing", "No data"]
     };
   },
   components: {
-    ProductResults
+    ProductResults,
+    Filters,
+    SlotItem
   }
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
 #product-details {
   .breadcrumb-wrapper {
     .link {
@@ -83,6 +95,9 @@ export default {
         }
       }
     }
+  }
+  .product-slots {
+    margin-top: 30px;
   }
 }
 </style>

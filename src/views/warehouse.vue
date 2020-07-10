@@ -1,9 +1,6 @@
 <template>
   <b-container id="dashboard" class="dashboard pb-5">
-    <div class="header d-flex justify-content-between flex-wrap">
-      <h1 class="heading text-capitalize">utilization dashboard</h1>
-      <b-button size="md" variant="primary" class="my-2 my-sm-0">Export data</b-button>
-    </div>
+    <Header heading="Utilization Dashboard" />
     <div class="data-wrapper">
       <div class="sorting-options mb-2">
         <span class="label mr-2">Sort by:</span>
@@ -24,6 +21,7 @@
 
 <script>
 import ProductCard from "@/components/ProductCard";
+import Header from "@/components/Header";
 
 export default {
   name: "Dashboard",
@@ -34,7 +32,8 @@ export default {
     };
   },
   components: {
-    ProductCard
+    ProductCard,
+    Header
   },
   methods: {
     setSorting(option) {

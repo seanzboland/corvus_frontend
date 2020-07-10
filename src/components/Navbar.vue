@@ -31,7 +31,7 @@ export default {
         { to: "/warehouse", name: "Warehouse" },
         { to: "/Discrepancy", name: "Discrepancy analysis" },
         { to: "/Reports", name: "Reports" },
-        { to: "/Flight", name: "Flight data" }
+        { to: "/flight-data", name: "Flight data" }
       ]
     };
   },

@@ -7,19 +7,19 @@
           <p class="sub-title mb-0">Last scanned 4 hours ago</p>
         </template>
         <div class="result d-flex mt-3 justify-content-between align-items-center">
-          <p class="name mb-0 py-1 px-2 exception">exception</p>
+          <Badge type="exception" text="exception" />
           <h5 class="quantity mb-0">15</h5>
         </div>
         <div class="result d-flex mt-3 justify-content-between align-items-center">
-          <p class="name mb-0 py-1 px-2 unscanned">unscanned</p>
+          <Badge type="unscanned" text="unscanned" />
           <h5 class="quantity mb-0">2</h5>
         </div>
         <div class="result d-flex mt-3 justify-content-between align-items-center">
-          <p class="name mb-0 py-1 px-2 occupied">occupied</p>
+          <Badge type="occupied" text="occupied" />
           <h5 class="quantity mb-0">1034</h5>
         </div>
         <div class="result d-flex mt-3 justify-content-between align-items-center">
-          <p class="name mb-0 py-1 px-2 unoccupied">unoccupied</p>
+          <Badge type="unoccupied" text="unoccupied" />
           <h5 class="quantity mb-0">12</h5>
         </div>
       </b-card>
@@ -28,9 +28,14 @@
 </template>
 
 <script>
+import Badge from "@/components/Badge";
+
 export default {
   name: "ProductCard",
-  props: {}
+  props: {},
+  components: {
+    Badge
+  }
 };
 </script>
 
@@ -48,25 +53,6 @@ export default {
     }
     .card-body {
       padding: 0 16px 16px;
-      .result {
-        .name {
-          font-weight: 500;
-          border-radius: 16px;
-          color: #2f2f2f;
-          &.exception {
-            background-color: #fe7068;
-          }
-          &.unscanned {
-            background-color: rgba(245, 178, 77, 0.6);
-          }
-          &.occupied {
-            background-color: rgba(111, 175, 141, 0.5);
-          }
-          &.unoccupied {
-            background-color: #dedede;
-          }
-        }
-      }
     }
   }
 }

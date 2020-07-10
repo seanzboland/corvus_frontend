@@ -2,10 +2,16 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import warehouse from '../views/warehouse.vue'
 import productDetails from '../views/productDetails.vue'
+import flightData from '../views/flightData.vue'
 
 Vue.use(VueRouter)
 
   const routes = [
+  {
+    path: '/',
+    name: 'home',
+    component: warehouse
+  },
   {
     path: '/warehouse',
     name: 'warehouse',
@@ -15,6 +21,11 @@ Vue.use(VueRouter)
     path: "/warehouse/:productId",
     name: "productDetails",
     component: productDetails,
+  },
+  {
+    path: "/flight-data",
+    name: "flightData",
+    component: flightData,
   },
 ]
 
