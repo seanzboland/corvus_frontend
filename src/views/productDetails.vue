@@ -43,7 +43,7 @@
     <ProductResults :exception="78" :unscanned="2" :occupied="89" :unoccupied="10" />
     <Filters :filters="filters" />
     <b-row class="product-slots">
-      <b-col cols="12" sm="6" md="4" lg="3" v-for="i in 12" :key="i">
+      <b-col class="p-1" cols="6" sm="4" md="3" lg="3" v-for="i in 12" :key="i">
         <SlotItem :slotType="j" v-for="j in slotTypes" :key="j+1" />
       </b-col>
     </b-row>

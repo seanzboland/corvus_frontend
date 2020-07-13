@@ -26,6 +26,7 @@ export default {
   border-radius: 16px;
   color: #2f2f2f;
   width: fit-content;
+  height: fit-content;
   padding: 4px 12px;
   &.exception {
     background-color: #fe7068;

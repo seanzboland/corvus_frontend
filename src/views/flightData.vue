@@ -10,7 +10,11 @@
       :fields="fields"
       responsive
       hover
-    ></b-table>
+    >
+      <template v-slot:head()="data">
+        <span class="hader-text">{{ data.label }}</span>
+      </template>
+    </b-table>
     <b-row>
       <b-col class="d-flex justify-content-end">
         <div class="pagination mr-3 mt-2 d-flex justify-content-between align-items-center">
@@ -257,20 +261,29 @@ export default {
     border-radius: 4px;
     padding: 0 16px 12px;
     .table {
+      td,th {
+        min-width: 150px;
+      }
       thead {
-        th {
-          font-size: 15px;
-          line-height: 20px;
-          letter-spacing: -0.016em;
-          color: #7a7a7a;
-          font-weight: normal;
-          border-top: 0;
-          &:focus {
+        tr {
+          [aria-sort="ascending"], [aria-sort="descending"] {
             font-weight: 500;
             color: #2F2F2F;
-            outline: none;
           }
-        }
+          th {
+            font-size: 15px;
+            line-height: 20px;
+            letter-spacing: -0.016em;
+            color: #7a7a7a;
+            font-weight: normal;
+            border-top: 0;
+            &:focus {
+              font-weight: 500;
+              color: #2F2F2F;
+              outline: none;
+            }
+          }
+        } 
       }
     }
   }

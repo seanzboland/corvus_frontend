@@ -9,6 +9,32 @@ body,
   padding: 0;
 }
 
+@media(min-width: 576px) {
+  .container {
+    max-width: 550px !important;
+  }
+}
+@media(min-width: 650px) {
+  .container {
+    max-width: 620px !important;
+  }
+}
+@media(min-width: 768px) {
+  .container {
+    max-width: 760px !important;
+  }
+}
+@media (min-width: 992px){
+  .container {
+      max-width: 960px !important;
+  }
+}
+@media (min-width: 1200px){
+  .container {
+      max-width: 1140px !important;
+  }
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: $font-primary, sans-serif;
   font-style: normal;
@@ -69,7 +95,7 @@ p {
     text-align: center;
     letter-spacing: -0.02em;
     height: 40px;
-    width: 148px;
+    min-width: 148px;
   }
   &:active {
     &:focus {

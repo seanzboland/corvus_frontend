@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import warehouse from '../views/warehouse.vue'
 import productDetails from '../views/productDetails.vue'
 import flightData from '../views/flightData.vue'
+import discrepancyAnalysis from '../views/discrepancyAnalysis.vue'
 
 Vue.use(VueRouter)
 
@@ -26,6 +27,11 @@ Vue.use(VueRouter)
     path: "/flight-data",
     name: "flightData",
     component: flightData,
+  },
+  {
+    path: "/discrepancy-analysis",
+    name: "discrepancyAnalysis",
+    component: discrepancyAnalysis,
   },
 ]
 

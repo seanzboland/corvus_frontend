@@ -11,7 +11,7 @@
         </b-dropdown>
       </div>
       <b-row>
-        <b-col cols="12" sm="4" md="4" lg="3" v-for="i in 16" :key="i">
+        <b-col cols="12" sm="4" md="3" lg="3" v-for="i in 16" :key="i">
           <ProductCard />
         </b-col>
       </b-row>

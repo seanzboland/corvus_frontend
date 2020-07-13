@@ -8,7 +8,7 @@
       <Badge :type="slotType" :text="slotType" />
     </div>
 
-    <b-modal v-model="modalShow" centered size="sm">
+    <b-modal v-model="modalShow" centered size="sm" dialog-class="modal-slot-item">
       <template v-slot:modal-header>
         <div class="last-scanned d-flex align-items-center">
           <h6 class="mb-0 mr-2 pr-1">Last scanned</h6>
@@ -88,7 +88,7 @@ export default {
     color: #000000;
   }
 }
-.modal-sm {
+.modal-slot-item {
   max-width: 388px !important;
   .modal-content {
     background: #ffffff;
