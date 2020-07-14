@@ -15,7 +15,7 @@
       </template>
     </div>
     <AnalysisFileUpload v-if="newAnalysis" v-on:analyze="analyze" />
-    <AnalysisReportItem :item="item" v-else />
+    <AnalysisReportItem v-for="(item, index) in items" :key="index" :item="item" v-else />
     <b-modal
       v-model="modalShow"
       centered
@@ -69,11 +69,68 @@ export default {
     return {
       modalShow: false,
       newAnalysis: true,
-      item: {
-        title: "Move items",
-        description:
-          "These items have been found in a different location from what was expected."
-      }
+      items: [
+        {
+          title: "Move items",
+          description:
+            "These items have been found in a different location from what was expected.",
+          pallets: [
+            {
+              pallet_number: 123,
+              last_scanned: "Last scanned Jun 5, 2019 08:34",
+              found: {
+                asile: "Aisle 3",
+                slot: "Slot 23"
+              },
+              expected: {
+                asile: "Aisle 3",
+                slot: "Slot 50"
+              }
+            },
+            {
+              pallet_number: 120394105,
+              last_scanned: "Last scanned Jun 5, 2019 08:34",
+              found: {
+                asile: "Aisle 3",
+                slot: "Slot 30"
+              },
+              expected: {
+                asile: "Aisle 4",
+                slot: "Slot 50"
+              }
+            }
+          ]
+        },
+        {
+          title: "Missing items",
+          description: "These items were not found.",
+          pallets: [
+            {
+              pallet_number: 123,
+              last_scanned: "Reported missing Jun 9, 2019 10:00",
+              expected: {
+                asile: "Aisle 3",
+                slot: "Slot 30"
+              }
+            }
+          ]
+        },
+        {
+          title: "Extra items",
+          description:
+            "These items were not in your report, but found in the warehouse.",
+          pallets: [
+            {
+              pallet_number: 123,
+              last_scanned: "Last scanned Jun 9, 2019 02:00",
+              expected: {
+                asile: "Aisle 3",
+                slot: "Slot 2"
+              }
+            }
+          ]
+        }
+      ]
     };
   },
   components: {

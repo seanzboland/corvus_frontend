@@ -1,26 +1,34 @@
 <template>
   <div class="analysis-report-pallet">
     <div class="pallet-header d-flex flex-wrap align-items-baseline">
-      <h5 class="pallet-number mr-3">Pallet #123</h5>
-      <p class="m-0">Last scanned Jun 5, 2019 08:34</p>
+      <h5 class="pallet-number mr-3">Pallet #{{pallet.pallet_number}}</h5>
+      <p class="m-0">{{pallet.last_scanned}}</p>
     </div>
     <div class="pallet-details-row d-flex flex-wrap">
-      <div class="found d-flex mr-sm-5 pr-md-5 pr-0">
+      <div class="found d-flex mr-sm-5 pr-md-5 pr-0" v-if="pallet.found">
         <span class="type text-uppercase">FOUND</span>
-        <h5 class="found-result">Aisle 3</h5>
-        <h5 class="found-result">Slot 23</h5>
+        <h5 class="found-result">{{pallet.found.asile}}</h5>
+        <h5 class="found-result">{{pallet.found.slot}}</h5>
       </div>
-      <div class="expected d-flex">
+      <div class="expected d-flex" v-if="pallet.expected">
         <span class="type text-uppercase">EXPECTED</span>
-        <h5 class="expected-result">Aisle 3</h5>
-        <h5 class="expected-result">Slot 50</h5>
+        <h5 class="expected-result">{{pallet.expected.asile}}</h5>
+        <h5 class="expected-result">{{pallet.expected.slot}}</h5>
       </div>
     </div>
   </div>
 </template>
 <script>
 export default {
-  name: "AnalysisReportPallet"
+  name: "AnalysisReportPallet",
+  props: {
+    pallet: {
+      type: Object,
+      default: () => {
+        return {};
+      }
+    }
+  }
 };
 </script>
 
