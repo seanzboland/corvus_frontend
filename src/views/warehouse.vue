@@ -12,7 +12,7 @@
       </div>
       <b-row>
         <b-col cols="12" sm="4" md="3" lg="3" v-for="i in 16" :key="i">
-          <ProductCard />
+          <AisleCard />
         </b-col>
       </b-row>
     </div>
@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import ProductCard from "@/components/ProductCard";
+import AisleCard from "@/components/AisleCard";
 import Header from "@/components/Header";
 
 export default {
@@ -32,7 +32,7 @@ export default {
     };
   },
   components: {
-    ProductCard,
+    AisleCard,
     Header
   },
   methods: {

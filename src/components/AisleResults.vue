@@ -25,7 +25,7 @@
 
 <script>
 export default {
-  name: "ProductResults",
+  name: "AisleResults",
   props: {
     exception: {
       type: Number,

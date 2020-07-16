@@ -1,5 +1,5 @@
 <template>
-  <b-container id="product-details" class="product-details pb-5">
+  <b-container id="aisle-details" class="aisle-details pb-5">
     <div class="breadcrumb-wrapper my-3">
       <b-link to="/warehouse" class="link d-flex align-items-center">
         <img src="../assets/img/arrow_back.png" alt="got back" class="img-fluid mr-2" />
@@ -40,9 +40,9 @@
       </b-collapse>
       <p :class="`m-0 ${showDetails ? 'mt-3' : ''}`">Data valid between Jun 18 and Jun 30, 2019</p>
     </div>
-    <ProductResults :exception="78" :unscanned="2" :occupied="89" :unoccupied="10" />
+    <AisleResults :exception="78" :unscanned="2" :occupied="89" :unoccupied="10" />
     <Filters :filters="filters" />
-    <b-row class="product-slots">
+    <b-row class="aisle-slots">
       <b-col class="p-1" cols="6" sm="4" md="3" lg="3" v-for="i in 12" :key="i">
         <SlotItem :slotType="j" v-for="j in slotTypes" :key="j+1" />
       </b-col>
@@ -51,12 +51,12 @@
 </template>
 
 <script>
-import ProductResults from "@/components/ProductResults";
+import AisleResults from "@/components/AisleResults";
 import Filters from "@/components/Filters";
 import SlotItem from "@/components/SlotItem";
 
 export default {
-  name: "productDetails",
+  name: "AisleDetails",
   data() {
     return {
       showDetails: false,
@@ -65,7 +65,7 @@ export default {
     };
   },
   components: {
-    ProductResults,
+    AisleResults,
     Filters,
     SlotItem
   }
@@ -73,7 +73,7 @@ export default {
 </script>
 
 <style lang="scss" >
-#product-details {
+#aisle-details {
   .breadcrumb-wrapper {
     .link {
       font-weight: normal;
@@ -96,7 +96,7 @@ export default {
       }
     }
   }
-  .product-slots {
+  .aisle-slots {
     margin-top: 30px;
   }
 }

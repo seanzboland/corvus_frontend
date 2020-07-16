@@ -32,7 +32,7 @@ export default {
       navLinks: [
         { to: "/warehouse", name: "Warehouse" },
         { to: "/discrepancy-analysis", name: "Discrepancy analysis" },
-        { to: "/Reports", name: "Reports" },
+        { to: "/reports", name: "Reports" },
         { to: "/flight-data", name: "Flight data" }
       ]
     };

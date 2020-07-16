@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import warehouse from '../views/warehouse.vue'
-import productDetails from '../views/productDetails.vue'
+import AisleDetails from '../views/aisleDetails.vue'
 import flightData from '../views/flightData.vue'
 import discrepancyAnalysis from '../views/discrepancyAnalysis.vue'
+import reports from '../views/reports.vue'
 
 Vue.use(VueRouter)
 
@@ -19,9 +20,9 @@ Vue.use(VueRouter)
     component: warehouse
   },
   {
-    path: "/warehouse/:productId",
-    name: "productDetails",
-    component: productDetails,
+    path: "/warehouse/:aisleId",
+    name: "AisleDetails",
+    component: AisleDetails,
   },
   {
     path: "/flight-data",
@@ -32,6 +33,11 @@ Vue.use(VueRouter)
     path: "/discrepancy-analysis",
     name: "discrepancyAnalysis",
     component: discrepancyAnalysis,
+  },
+  {
+    path: "/reports",
+    name: "reports",
+    component: reports,
   },
 ]
 

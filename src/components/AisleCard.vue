@@ -31,7 +31,7 @@
 import Badge from "@/components/Badge";
 
 export default {
-  name: "ProductCard",
+  name: "AisleCard",
   props: {},
   components: {
     Badge
