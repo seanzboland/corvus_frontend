@@ -51,6 +51,7 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
 import AisleResults from "@/components/AisleResults";
 import Filters from "@/components/Filters";
 import SlotItem from "@/components/SlotItem";
@@ -61,13 +62,24 @@ export default {
     return {
       showDetails: false,
       slotTypes: ["exception", "occupied", "unscanned", "unoccupied"],
-      filters: ["Extra", "Mismatched", "Missing", "No data"]
+      filters: ["Extra", "Mismatched", "Missing", "No data"],
     };
+  },
+  computed: {
+    ...mapGetters(['aisle']),
   },
   components: {
     AisleResults,
     Filters,
     SlotItem
+  },
+  mounted() {
+    if(this.$route.params.aisleId) {
+      this.getSingleAisle(this.$route.params.aisleId)
+    }
+  },
+  methods: {
+    ...mapActions(['getSingleAisle'])
   }
 };
 </script>

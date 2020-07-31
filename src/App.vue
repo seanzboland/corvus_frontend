@@ -6,18 +6,17 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import Navbar from "@/components/Navbar";
-import axios from 'axios'
 export default {
   components: {
     Navbar
   },
+  methods: {
+    ...mapActions(['getAisles'])
+  },
   mounted() {
-    axios
-      .get('/aisles/a1')
-      .then(response => {
-        console.log('response', response)
-      })
+    this.getAisles()
   }
 };
 </script>

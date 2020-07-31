@@ -10,16 +10,22 @@
           </b-dropdown-item>
         </b-dropdown>
       </div>
-      <b-row>
-        <b-col cols="12" sm="4" md="3" lg="3" v-for="i in 16" :key="i">
-          <AisleCard />
+      <b-row v-if="aisles.length > 0">
+        <b-col cols="12" sm="4" md="3" lg="3" v-for="(aisle, index) in aisles" :key="index">
+          <AisleCard :aisle="aisle" />
         </b-col>
+      </b-row>
+      <b-row v-else class="spinner-wrapper justify-content-center align-items-center">
+        <b-spinner
+          variant="primary"
+        ></b-spinner>
       </b-row>
     </div>
   </b-container>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import AisleCard from "@/components/AisleCard";
 import Header from "@/components/Header";
 
@@ -28,8 +34,11 @@ export default {
   data() {
     return {
       sortingOptions: ["Aisle A - Aisle Z", "Aisle Z - Aisle A"],
-      selectedOption: "Aisle A - Aisle Z"
+      selectedOption: "Aisle A - Aisle Z",
     };
+  },
+  computed: {
+    ...mapGetters(['aisles'])
   },
   components: {
     AisleCard,
@@ -39,8 +48,8 @@ export default {
     setSorting(option) {
       this.selectedOption = option;
       console.log("selected sorting option", option);
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -90,6 +99,13 @@ export default {
             }
           }
         }
+      }
+    }
+    .spinner-wrapper {
+      height: 300px;
+      .spinner-border {
+        width: 4rem;
+        height: 4rem;
       }
     }
   }
