@@ -9,7 +9,7 @@
     <div class="header pt-4">
       <div class="d-flex justify-content-between align-items-end flex-wrap">
         <div class="details d-flex align-items-end mb-3">
-          <h1 class="heading text-capitalize mr-3 mb-0">Aisle H</h1>
+          <h1 class="heading text-uppercase mr-3 mb-0">{{aisleDetails ? aisleDetails.id : ''}}</h1>
           <h5
             @click="showDetails = !showDetails"
             class="details-toggler mb-0 mr-3"
@@ -21,13 +21,15 @@
         </div>
       </div>
       <b-collapse v-model="showDetails" class="details-card mt-2">
-        <div class="detail-item d-flex align-items-center">
+        <div v-if="aisleDetails" class="detail-item d-flex align-items-center">
           <h6 class="name mr-2 mb-0">Items</h6>
-          <h5 class="value mb-0">1980</h5>
+          <h5 class="value mb-0">
+            {{aisleDetails.numberException + aisleDetails.numberOccupied + aisleDetails.numberUnscanned}}
+          </h5>
         </div>
         <div class="detail-item d-flex align-items-center">
           <h6 class="name mr-2 mb-0">Slots</h6>
-          <h5 class="value mb-0">300</h5>
+          <h5 class="value mb-0">{{aisle.length}}</h5>
         </div>
         <div class="detail-item d-flex align-items-center">
           <h6 class="name mr-2 mb-0">Last modified</h6>
@@ -35,23 +37,39 @@
         </div>
         <div class="detail-item d-flex align-items-center">
           <h6 class="name mr-2 mb-0">Last scanned</h6>
-          <h5 class="value mb-0">4 days ago</h5>
+          <h5 class="value mb-0">{{formatDate(aisleDetails.lastScanned)}}</h5>
         </div>
       </b-collapse>
       <p :class="`m-0 ${showDetails ? 'mt-3' : ''}`">Data valid between Jun 18 and Jun 30, 2019</p>
     </div>
-    <AisleResults :exception="78" :unscanned="2" :occupied="89" :unoccupied="10" />
-    <Filters :filters="filters" />
-    <b-row class="aisle-slots">
-      <b-col class="p-1" cols="6" sm="4" md="3" lg="3" v-for="i in 12" :key="i">
-        <SlotItem :slotType="j" v-for="j in slotTypes" :key="j+1" />
-      </b-col>
-    </b-row>
+    <AisleResults
+      v-if="aisleDetails"
+      :exception="aisleDetails.numberException"
+      :unscanned="aisleDetails.numberUnscanned"
+      :occupied="aisleDetails.numberOccupied"
+      :unoccupied="aisleDetails.numberEmpty"
+    />
+    <template v-if="aisle && !isLoading && aisle.length > 0">
+      <Filters :filters="filters" />
+      <b-row class="aisle-slots">
+        <b-col class="p-0 pr-2" cols="6" sm="4" md="3" lg="3" v-for="(item, index) in aisle" :key="index" >
+          <SlotItem :item="item" />
+        </b-col>
+      </b-row>
+    </template>
+    <template v-if="isLoading">
+      <b-row class="spinner-wrapper justify-content-center align-items-center">
+        <b-spinner
+          variant="primary"
+        ></b-spinner>
+      </b-row>
+    </template>
   </b-container>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
+import { getFormattedDate } from '@/util/common.js';
 import AisleResults from "@/components/AisleResults";
 import Filters from "@/components/Filters";
 import SlotItem from "@/components/SlotItem";
@@ -61,12 +79,17 @@ export default {
   data() {
     return {
       showDetails: false,
-      slotTypes: ["exception", "occupied", "unscanned", "unoccupied"],
       filters: ["Extra", "Mismatched", "Missing", "No data"],
     };
   },
   computed: {
-    ...mapGetters(['aisle']),
+    aisleDetails() {
+      return this.$store.getters['getAisleByID'](this.$route.params.aisleId)
+    },
+    aisle() {
+      return this.$store.getters['aisle'] ? this.$store.getters['aisle'] : []
+    },
+    ...mapState(['isLoading'])
   },
   components: {
     AisleResults,
@@ -79,7 +102,13 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['getSingleAisle'])
+    ...mapActions(['getSingleAisle']),
+    formatDate(date) {
+      return getFormattedDate(date)
+    }
+  },
+  beforeDestroy() {
+    this.$store.commit('SET_SINGLE_AISLE', null)
   }
 };
 </script>
@@ -110,6 +139,13 @@ export default {
   }
   .aisle-slots {
     margin-top: 30px;
+  }
+  .spinner-wrapper {
+    height: 300px;
+    .spinner-border {
+      width: 4rem;
+      height: 4rem;
+    }
   }
 }
 </style>

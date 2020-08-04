@@ -2,10 +2,12 @@ export const getters = {
   aisles(state) {
     return state.aisles
   },
-  singleAisle(state, id) {
-    return state.aisles.filter(item => item.id == id)
+  getAisleByID: state => id => {
+    if(state.aisles.length > 0) {
+      return state.aisles.find(aisle => aisle.id === id)
+    }
   },
   aisle(state) {
     return state.aisle
-  }
+  },
 }

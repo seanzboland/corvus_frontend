@@ -4,15 +4,15 @@
       @click="modalShow = !modalShow"
       :class="`slot-wrapper p-3 d-flex justify-content-between ${modalShow ? 'active' : ''}`"
     >
-      <h4 class="slot-name mb-0">A10-3</h4>
-      <Badge :type="slotType" :text="slotType" />
+      <h4 class="slot-name mb-0">{{item.shelf}}-{{item.slot}}</h4>
+      <Badge v-if="item.discrepancy !== ''" :type="item.discrepancy" :text="item.discrepancy" />
     </div>
 
     <b-modal v-model="modalShow" centered size="sm" dialog-class="modal-slot-item">
       <template v-slot:modal-header>
         <div class="last-scanned d-flex align-items-center">
           <h6 class="mb-0 mr-2 pr-1">Last scanned</h6>
-          <h5 class="mb-0">4 hours ago</h5>
+          <h5 class="mb-0">{{formatDate(item.stopTime)}}</h5>
         </div>
         <img
           src="../assets/img/close.png"
@@ -22,16 +22,15 @@
         />
       </template>
       <div class="slot-title p-4">
-        <h3>Slot H-16</h3>
-        <Badge type="exception" text="exception: missing SKU" />
+        <h3>Slot {{item.slot}}</h3>
+        <Badge v-if="item.discrepancy !== ''" :type="item.discrepancy" :text="item.discrepancy" />
       </div>
       <img src="../assets/img/modal_image.png" alt="slot item" class="img-fluid" />
       <div class="sku-scanned p-4 mt-3">
         <h4 class="mb-3">SKU scanned</h4>
-        <h5>F091239401</h5>
-        <h5>F091239401</h5>
+        <h5>{{item.sku}}</h5>
       </div>
-      <div class="history px-4 pt-3">
+      <!-- <div class="history px-4 pt-3">
         <h4 class="mb-3">History</h4>
         <div class="details">
           <div class="header d-flex justify-content-between align-items-center">
@@ -44,7 +43,7 @@
             <h5>Mar 31, 2019</h5>
           </div>
         </div>
-      </div>
+      </div> -->
       <template v-slot:modal-footer>
         <b-button size="md" variant="primary" class="mt-4">Export data</b-button>
       </template>
@@ -53,6 +52,7 @@
 </template>
 
 <script>
+import { getFormattedDate } from '@/util/common.js';
 import Badge from "@/components/Badge";
 
 export default {
@@ -63,13 +63,18 @@ export default {
     };
   },
   props: {
-    slotType: {
-      type: String,
-      default: "occupied"
+    item: {
+      type: Object,
+      default: null
     }
   },
   components: {
     Badge
+  },
+  methods: {
+    formatDate(date) {
+      return getFormattedDate(date)
+    }
   }
 };
 </script>
@@ -80,6 +85,7 @@ export default {
   border: 1px solid #dedede;
   border-radius: 2px;
   transition: 0.2s ease-in-out;
+  min-width: 150px;
   &:hover,
   &.active {
     border-color: #fe7068;

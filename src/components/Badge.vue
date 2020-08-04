@@ -28,6 +28,7 @@ export default {
   width: fit-content;
   height: fit-content;
   padding: 4px 12px;
+  background-color: #fe7068;
   &.exception {
     background-color: #fe7068;
   }

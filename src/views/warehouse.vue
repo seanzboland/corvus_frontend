@@ -15,7 +15,7 @@
           <AisleCard :aisle="aisle" />
         </b-col>
       </b-row>
-      <b-row v-else class="spinner-wrapper justify-content-center align-items-center">
+      <b-row v-if="isLoading" class="spinner-wrapper justify-content-center align-items-center">
         <b-spinner
           variant="primary"
         ></b-spinner>
@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapState } from 'vuex';
 import AisleCard from "@/components/AisleCard";
 import Header from "@/components/Header";
 
@@ -38,7 +38,8 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['aisles'])
+    ...mapGetters(['aisles']),
+    ...mapState(['isLoading'])
   },
   components: {
     AisleCard,

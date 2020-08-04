@@ -4,5 +4,8 @@ export const mutations = {
   },
   SET_SINGLE_AISLE(state, payload) {
     state.aisle = payload
-  }
+  },
+  SET_LOADING(state, loadingState) {
+    state.isLoading = loadingState
+  },
 }
