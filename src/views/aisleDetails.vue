@@ -20,8 +20,8 @@
           <b-button size="md" variant="primary" class="my-2 my-sm-0">Export data</b-button>
         </div>
       </div>
-      <b-collapse v-model="showDetails" class="details-card mt-2">
-        <div v-if="aisleDetails" class="detail-item d-flex align-items-center">
+      <b-collapse v-model="showDetails"  v-if="aisleDetails" class="details-card mt-2">
+        <div class="detail-item d-flex align-items-center">
           <h6 class="name mr-2 mb-0">Items</h6>
           <h5 class="value mb-0">
             {{aisleDetails.numberException + aisleDetails.numberOccupied + aisleDetails.numberUnscanned}}
@@ -49,11 +49,11 @@
       :occupied="aisleDetails.numberOccupied"
       :unoccupied="aisleDetails.numberEmpty"
     />
-    <template v-if="aisle && !isLoading && aisle.length > 0">
+    <template v-if="shelfs && !isLoading && shelfs.length > 0">
       <Filters :filters="filters" />
-      <b-row class="aisle-slots">
-        <b-col class="p-0 pr-2" cols="6" sm="4" md="3" lg="3" v-for="(item, index) in aisle" :key="index" >
-          <SlotItem :item="item" />
+      <b-row class="aisle-slots px-3 flex-nowrap">
+        <b-col class="p-0 mr-3 shelfs" cols="4" sm="4" md="4" lg="4" v-for="(shelf, index) in shelfs" :key="index" >
+          <SlotItem :item="item" :key="index" v-for="(item, index) in shelf" />
         </b-col>
       </b-row>
     </template>
@@ -86,8 +86,26 @@ export default {
     aisleDetails() {
       return this.$store.getters['getAisleByID'](this.$route.params.aisleId)
     },
+    shelfs() {
+      const slots = this.$store.getters['aisle'] ? this.$store.getters['aisle'] : [];
+      const shelfOne = [];
+      const shelfTwo = [];
+      const shelfThree = [];
+      slots.filter(item => {
+        if(item.shelf == 1) {
+          shelfOne.push(item)
+        }
+        if(item.shelf == 2) {
+          shelfTwo.push(item)
+        }
+        if(item.shelf == 3) {
+          shelfThree.push(item)
+        }
+      })
+      return [shelfOne ,shelfTwo ,shelfThree]
+    },
     aisle() {
-      return this.$store.getters['aisle'] ? this.$store.getters['aisle'] : []
+      return this.$store.getters['aisle'] ? this.$store.getters['aisle'] : [];
     },
     ...mapState(['isLoading'])
   },
@@ -139,6 +157,10 @@ export default {
   }
   .aisle-slots {
     margin-top: 30px;
+    overflow-x: auto;
+    .shelfs {
+      min-width: 200px;
+    }
   }
   .spinner-wrapper {
     height: 300px;

@@ -85,7 +85,7 @@ export default {
   border: 1px solid #dedede;
   border-radius: 2px;
   transition: 0.2s ease-in-out;
-  min-width: 150px;
+  min-width: 200px;
   &:hover,
   &.active {
     border-color: #fe7068;
